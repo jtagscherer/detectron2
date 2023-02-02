@@ -65,6 +65,15 @@ class VisualizationDemo(object):
                 print('Drawing instance seg')
                 instances = predictions["instances"].to(self.cpu_device)
                 print(instances)
+
+                def fullname(o):
+                    klass = o.__class__
+                    module = klass.__module__
+                    if module == 'builtins':
+                        return klass.__qualname__  # avoid outputs like 'builtins.str'
+                    return module + '.' + klass.__qualname__
+                print(fullname(visualizer))
+
                 vis_output = visualizer.draw_instance_predictions(predictions=instances)
 
         return predictions, vis_output
