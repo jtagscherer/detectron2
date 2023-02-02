@@ -261,7 +261,7 @@ class VisImage:
             img (ndarray): an RGB image of shape (H, W, 3) in range [0, 255].
             scale (float): scale the input image
         """
-        self.img = np.zeros_like(img)
+        self.img = img
         self.scale = scale
         self.width, self.height = img.shape[1], img.shape[0]
         self._setup_figure(img)
@@ -367,6 +367,7 @@ class Visualizer:
                 instances on an image.
         """
         self.img = np.asarray(img_rgb).clip(0, 255).astype(np.uint8)
+        self.img = np.zeros_like(self.img)
         if metadata is None:
             metadata = MetadataCatalog.get("__nonexist__")
         self.metadata = metadata
