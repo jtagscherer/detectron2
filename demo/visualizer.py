@@ -417,7 +417,7 @@ class Visualizer:
         boxes = None
         scores = None
         class_indices = [i for i, x in enumerate(classes) if x == 57]
-        labels = [labels[x] for x in class_indices]
+        labels = None
         masks = [masks[x] for x in class_indices]
         colors = [(1.0, 1.0, 1.0) for x in class_indices]
         alpha = 1.0
@@ -1136,10 +1136,11 @@ class Visualizer:
         """
         if edge_color is None:
             # make edge color darker than the polygon color
-            if alpha > 0.8:
+            '''if alpha > 0.8:
                 edge_color = self._change_color_brightness(color, brightness_factor=-0.7)
             else:
-                edge_color = color
+                edge_color = color'''
+            edge_color = color
         edge_color = mplc.to_rgb(edge_color) + (1,)
 
         polygon = mpl.patches.Polygon(
