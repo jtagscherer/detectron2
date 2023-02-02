@@ -398,8 +398,6 @@ class Visualizer:
         labels = _create_text_labels(classes, scores, self.metadata.get("thing_classes", None))
         keypoints = predictions.pred_keypoints if predictions.has("pred_keypoints") else None
 
-        print(f'Classes: {classes}')
-
         if predictions.has("pred_masks"):
             masks = np.asarray(predictions.pred_masks)
             masks = [GenericMask(x, self.output.height, self.output.width) for x in masks]
@@ -414,6 +412,15 @@ class Visualizer:
         else:
             colors = None
             alpha = 0.5
+
+        # Only draw single instance
+        boxes = None
+        scores = None
+        class_indices = [i for i, x in enumerate(classes) if x == 57]
+        labels = [labels[x] for x in class_indices]
+        masks = [masks[x] for x in class_indices]
+        colors = [1.0 for x in class_indices]
+        alpha = 1.0
 
         if self._instance_mode == ColorMode.IMAGE_BW:
             self.output.reset_image(
