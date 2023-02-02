@@ -419,7 +419,7 @@ class Visualizer:
         class_indices = [i for i, x in enumerate(classes) if x == 57]
         labels = [labels[x] for x in class_indices]
         masks = [masks[x] for x in class_indices]
-        colors = [1.0 for x in class_indices]
+        colors = [(1.0, 1.0, 1.0) for x in class_indices]
         alpha = 1.0
 
         if self._instance_mode == ColorMode.IMAGE_BW:
