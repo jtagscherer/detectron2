@@ -261,7 +261,7 @@ class VisImage:
             img (ndarray): an RGB image of shape (H, W, 3) in range [0, 255].
             scale (float): scale the input image
         """
-        self.img = img
+        self.img = np.zeros_like(img)
         self.scale = scale
         self.width, self.height = img.shape[1], img.shape[0]
         self._setup_figure(img)
