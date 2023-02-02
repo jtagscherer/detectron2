@@ -50,16 +50,19 @@ class VisualizationDemo(object):
         image = image[:, :, ::-1]
         visualizer = Visualizer(image, self.metadata, instance_mode=self.instance_mode)
         if "panoptic_seg" in predictions:
+            print('Drawing panoptic seg')
             panoptic_seg, segments_info = predictions["panoptic_seg"]
             vis_output = visualizer.draw_panoptic_seg_predictions(
                 panoptic_seg.to(self.cpu_device), segments_info
             )
         else:
             if "sem_seg" in predictions:
+                print('Drawing sem seg')
                 vis_output = visualizer.draw_sem_seg(
                     predictions["sem_seg"].argmax(dim=0).to(self.cpu_device)
                 )
             if "instances" in predictions:
+                print('Drawing instance seg')
                 instances = predictions["instances"].to(self.cpu_device)
                 vis_output = visualizer.draw_instance_predictions(predictions=instances)
 
